@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static "sitePPE/css/main.css" %}" />
+    <meta charset="UTF-8">
+    <title>Listes des interventions</title>
+</head>
+<body>
+
+    <div class="container-contact100">
+        <div class="wrap-contact100" >
+            <span class="contact100-form-title">
+                <label style="text-transform: uppercase">{{ user.technicien.nom }}</label> {{ user.technicien.prenom }}
+            </span>
+            {% for intervention in interventions %}
+                <div class="container">
+                    <div class="border bordure-arrondi">
+                        <div class="position-sticky fixed-top haut-droite">
+                            <a href="{% url "lire_visite" intervention.id %}" title="Visualiser" data-toggle="popover" data-trigger="hover" data-content="Visualiser l'intervention" data-placement="top"><button class="btn btn-primary"><span class="fa fa-eye"></span></button></a>
+                            <a href="{% url "nb_materiel" intervention.matricule_technicien.id intervention.id %}" title="Valider" data-toggle="popover" data-trigger="hover" data-content="Valider l'intervention"><button class="btn btn-success"><span class="fa fa-check"></span></button></a>
+                        </div>
+                        {{ intervention.numero_client }}
+                        <br>
+                        {{ intervention.date_visite }} {{ intervention.heure_visite }}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+
+            {% if is_paginated %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Précédent</a>
+                            </li>
+                        {% endif %}
+
+                        <li class="page-item disabled">
+                            <a class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</a>
+                        </li>
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+            <a href="{% url "logout" %}"><button style="float:right;width:150px;" class="btn btn-primary">Déconnexion</button></a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+</script>

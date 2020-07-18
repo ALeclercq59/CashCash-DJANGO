@@ -1,0 +1,28 @@
+{% load crispy_forms_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "sitePPE/css/main.css" %}" />
+    <meta charset="UTF-8">
+    <title>Nombre Matériels</title>
+</head>
+<body>
+<div class="container-contact100">
+    <div class="wrap-contact100" >
+        <span class="contact100-form-title">
+            Matériel(s) Vérifié(s)
+        </span>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </form>
+        <a href="{% url "liste_visites" matricule %}"><button class="btn btn-primary" style="float: right">Retour</button></a>
+    </div>
+</div>
+
+</body>
+</html>

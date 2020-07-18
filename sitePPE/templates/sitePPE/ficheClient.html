@@ -1,0 +1,29 @@
+{% load crispy_forms_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "sitePPE/css/main.css" %}" />
+    <meta charset="UTF-8">
+    <title>Fiche Client</title>
+</head>
+<body>
+<form method="post" action="">
+    <div class="container-contact100">
+        <div class="wrap-contact100" >
+            <span class="contact100-form-title">
+                Client n°{{ numero }}
+            </span>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <p style="text-align: center">
+                <button type="submit" class="btn btn-primary" style="width:100px" >Confirmer</button>
+            </p>
+        </div>
+    </div>
+</form>
+</body>
+</html>

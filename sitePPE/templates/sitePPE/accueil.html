@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "sitePPE/css/main.css" %}" />
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+</head>
+<body>
+
+    <div class="container-contact100">
+        <div class="wrap-contact100" >
+            <span class="contact100-form-title">
+                <label style="text-transform: uppercase">{{ user.assistant.nom }}</label> {{ user.assistant.prenom }}
+            </span>
+            <p style="text-align: center">
+                <a href="{%  url 'rechercheFicheClient' matricule %}"><button style="width:200px;text-align: center"  class="btn btn-primary">Fiche Client</button></a>
+                <br>
+                <br>
+                <a href="{%  url 'rechercheInterClient' matricule %}"><button style="width:200px;text-align: center"  class="btn btn-primary">Affecter Intervention</button></a>
+                <br>
+                <br>
+                <a href="{%  url 'consulterIntervention' matricule %}"><button style="width:200px;text-align: center"  class="btn btn-primary">Consulter Intervention</button></a>
+                <br>
+                <br>
+                <a href="{%  url 'rechercheStat' matricule %}"><button style="width:200px;text-align: center"  class="btn btn-primary">Statistiques</button></a>
+                <br>
+                <br>
+                <a href="{% url 'contrats' matricule %}"><button style="width:300px;" class="btn btn-primary" >⚠ Contrat arrivé a échéance : <span class="badge badge-light">{{ cmpt }}</span></button></a>
+            </p>
+            <br>
+            <a href="{% url "logout" %}"><button style="float:right;width:150px;" class="btn btn-primary">Déconnexion</button></a>
+        </div>
+    </div>
+
+</body>
+</html>
